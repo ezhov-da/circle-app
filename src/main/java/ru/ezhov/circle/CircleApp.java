@@ -1,20 +1,20 @@
 package ru.ezhov.circle;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.geom.Area;
 import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
-import javax.swing.*;
 
 /**
  * Окно приложения
  * <p>
+ *
  * @author ezhov_da
  */
-public class CircleApp extends JDialog
-{
+public class CircleApp extends JDialog {
     private JPanel basicPanel;
     private CircleButton circleButtonLT;
     private CircleButton circleButtonRT;
@@ -23,8 +23,7 @@ public class CircleApp extends JDialog
     private int w;
     private int h;
 
-    public CircleApp(int w, int h)
-    {
+    public CircleApp(int w, int h) {
         this.w = w;
         this.h = h;
         shape();
@@ -32,15 +31,13 @@ public class CircleApp extends JDialog
         init();
     }
 
-    private void init()
-    {
+    private void init() {
         setLayout(null);
         initBasicPanel();
         add(basicPanel);
     }
 
-    private void initBasicPanel()
-    {
+    private void initBasicPanel() {
         basicPanel = new JPanel(new GridLayout(2, 2));
         basicPanel.setSize(w - 2, h - 2);
         circleButtonLT = createCircleButton(Part.LEFT_TOP);
@@ -50,21 +47,17 @@ public class CircleApp extends JDialog
         basicPanel.setLocation(1, 1);
     }
 
-    private CircleButton createCircleButton(Part part)
-    {
+    private CircleButton createCircleButton(Part part) {
         CircleButton circleButton = new CircleButton(part, basicPanel);
         basicPanel.add(circleButton);
         return circleButton;
     }
 
-    private void shape()
-    {
+    private void shape() {
         setUndecorated(true);
-        addComponentListener(new ComponentAdapter()
-        {
+        addComponentListener(new ComponentAdapter() {
             @Override
-            public void componentResized(ComponentEvent e)
-            {
+            public void componentResized(ComponentEvent e) {
                 Area a1 = new Area(new Ellipse2D.Double(0, 0, getWidth(), getHeight()));
                 setShape(a1);
             }
@@ -72,8 +65,7 @@ public class CircleApp extends JDialog
     }
 
     @Override
-    public void paint(Graphics g)
-    {
+    public void paint(Graphics g) {
         //Убираем шероховатости:
         //https://community.oracle.com/blogs/campbell/2006/07/19/java-2d-trickery-soft-clipping
 
@@ -124,23 +116,19 @@ public class CircleApp extends JDialog
         super.paint(g);
     }
 
-    public CircleButton getCircleButtonLT()
-    {
+    public CircleButton getCircleButtonLT() {
         return circleButtonLT;
     }
 
-    public CircleButton getCircleButtonRT()
-    {
+    public CircleButton getCircleButtonRT() {
         return circleButtonRT;
     }
 
-    public CircleButton getCircleButtonLB()
-    {
+    public CircleButton getCircleButtonLB() {
         return circleButtonLB;
     }
 
-    public CircleButton getCircleButtonRB()
-    {
+    public CircleButton getCircleButtonRB() {
         return circleButtonRB;
     }
 }

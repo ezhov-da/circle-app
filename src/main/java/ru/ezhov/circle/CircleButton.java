@@ -1,5 +1,7 @@
 package ru.ezhov.circle;
 
+import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -7,17 +9,14 @@ import java.awt.geom.Area;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
-import javax.swing.Icon;
-import javax.swing.JPanel;
-import javax.swing.border.Border;
 
 /**
  * Кнопка
  * <p>
+ *
  * @author ezhov_da
  */
-public class CircleButton extends JPanel implements MouseListener
-{
+public class CircleButton extends JPanel implements MouseListener {
 
     private static final Color SELECT_START = Color.BLUE;
     private static final Color SELECT_END = Color.WHITE;
@@ -33,8 +32,7 @@ public class CircleButton extends JPanel implements MouseListener
     private Area areaInputCircle;
     private DrawButtons drawButtons;
 
-    public CircleButton(Part part, Component parent)
-    {
+    public CircleButton(Part part, Component parent) {
         setLayout(null);
         this.part = part;
         this.parent = parent;
@@ -43,8 +41,7 @@ public class CircleButton extends JPanel implements MouseListener
     }
 
     @Override
-    protected void paintComponent(Graphics g)
-    {
+    protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
         Graphics2D graphics2D = (Graphics2D) g;
@@ -61,43 +58,35 @@ public class CircleButton extends JPanel implements MouseListener
 
     }
 
-    public void setIcon(Icon icon)
-    {
+    public void setIcon(Icon icon) {
         this.icon = icon;
     }
 
     @Override
-    public void mouseClicked(MouseEvent e)
-    {
+    public void mouseClicked(MouseEvent e) {
         //
     }
 
     @Override
-    public void mousePressed(MouseEvent e)
-    {
+    public void mousePressed(MouseEvent e) {
         //
     }
 
     @Override
-    public void mouseReleased(MouseEvent e)
-    {
+    public void mouseReleased(MouseEvent e) {
         //
     }
 
     @Override
-    public void mouseEntered(MouseEvent e)
-    {
+    public void mouseEntered(MouseEvent e) {
         initSelectColor();
     }
 
-    private void initSelectColor()
-    {
-        if (gradient != null)
-        {
+    private void initSelectColor() {
+        if (gradient != null) {
             colorNowStart = gradient.getSelectStart();
             colorNowEnd = gradient.getSelectEnd();
-        } else
-        {
+        } else {
             colorNowStart = SELECT_START;
             colorNowEnd = SELECT_END;
         }
@@ -106,19 +95,15 @@ public class CircleButton extends JPanel implements MouseListener
     }
 
     @Override
-    public void mouseExited(MouseEvent e)
-    {
+    public void mouseExited(MouseEvent e) {
         initDescelectColor();
     }
 
-    private void initDescelectColor()
-    {
-        if (gradient != null)
-        {
+    private void initDescelectColor() {
+        if (gradient != null) {
             colorNowStart = gradient.getDescelectStart();
             colorNowEnd = gradient.getDeselectEnd();
-        } else
-        {
+        } else {
             colorNowStart = DESELECT_START;
             colorNowEnd = DESELECT_END;
         }
@@ -126,20 +111,17 @@ public class CircleButton extends JPanel implements MouseListener
         repaint();
     }
 
-    public Gradient getGradient()
-    {
+    public Gradient getGradient() {
         return gradient;
     }
 
-    public void setGradient(Gradient gradient)
-    {
+    public void setGradient(Gradient gradient) {
         this.gradient = gradient;
         initDescelectColor();
     }
 
     //Помощник в рисовании кнопки
-    private class DrawButtons
-    {
+    private class DrawButtons {
         private Area a1;
         private int cX;
         private int cY;
@@ -158,8 +140,7 @@ public class CircleButton extends JPanel implements MouseListener
         private GradientPaint g2;
         private Graphics2D graphics2D;
 
-        public void draw(Graphics2D graphics2D)
-        {
+        public void draw(Graphics2D graphics2D) {
             this.graphics2D = graphics2D;
             w = parent.getWidth();
             h = parent.getHeight();
@@ -171,8 +152,7 @@ public class CircleButton extends JPanel implements MouseListener
             wC = (int) (w * 20 / 100);
             hC = (int) (h * 20 / 100);
 
-            switch (part)
-            {
+            switch (part) {
                 case LEFT_TOP:
                     drawLT();
                     break;
@@ -188,8 +168,7 @@ public class CircleButton extends JPanel implements MouseListener
             }
         }
 
-        private void drawLT()
-        {
+        private void drawLT() {
             DrawOptions drawOptions =
                     new DrawOptions(
                             new Rectangle(x, y, w, h),
@@ -197,16 +176,14 @@ public class CircleButton extends JPanel implements MouseListener
                             new Rectangle(cX - wC / 2, cY - hC / 2, wC, hC),
                             new Point(0, 0),
                             new Point(w, h));
-            if (border != null)
-            {
+            if (border != null) {
                 Insets inserts = border.getBorderInsets(CircleButton.this);
                 drawOptions.setRectangleWithBorderOne(
                         new Rectangle(wHalf - inserts.left - inserts.right, 0, wHalf + inserts.left + inserts.right, h));
                 drawOptions.setRectangleWithBorderOne(
                         new Rectangle(0, hHalf - inserts.bottom - inserts.top, w, hHalf + inserts.bottom + inserts.top));
             }
-            if (icon != null)
-            {
+            if (icon != null) {
                 int iw = icon.getIconWidth();
                 int ih = icon.getIconHeight();
                 drawOptions.setPointIcon(new Point((w / 2) - iw - iw / 2, (h / 2) - ih - ih / 2));
@@ -214,8 +191,7 @@ public class CircleButton extends JPanel implements MouseListener
             drawButton(drawOptions);
         }
 
-        private void drawButton(DrawOptions drawOptions)
-        {
+        private void drawButton(DrawOptions drawOptions) {
             Rectangle rectangleFigure = drawOptions.getRectangleFigure();
             Point point = drawOptions.getPoint();
             Rectangle rectangleInputCircle = drawOptions.getRectangleInputCircle();
@@ -237,8 +213,7 @@ public class CircleButton extends JPanel implements MouseListener
                     rectangleInputCircle.width,
                     rectangleInputCircle.height);
 
-            if (rectangleWithBorderOne != null && rectangleWithBorderTwo != null)
-            {
+            if (rectangleWithBorderOne != null && rectangleWithBorderTwo != null) {
                 executeWithBorder(
                         rectangleWithBorderOne.x, rectangleWithBorderOne.y, rectangleWithBorderOne.width, rectangleWithBorderOne.height,
                         rectangleWithBorderTwo.x, rectangleWithBorderTwo.y, rectangleWithBorderTwo.width, rectangleWithBorderTwo.height);
@@ -246,64 +221,54 @@ public class CircleButton extends JPanel implements MouseListener
             paintGradientStart(pointGradientStart.x, pointGradientStart.y);
             paintGradientEnd(pointGradientEnd.x, pointGradientEnd.y);
             drawGradient();
-            if (pointIcon != null)
-            {
+            if (pointIcon != null) {
                 drawIcon(pointIcon.x, pointIcon.y);
             }
 
         }
 
-        private void drawFigure(int x, int y, int w, int h)
-        {
+        private void drawFigure(int x, int y, int w, int h) {
             a1 = new Area(new Ellipse2D.Double(x, y, w, h));
         }
 
-        private void setCenterXY(int x, int y)
-        {
+        private void setCenterXY(int x, int y) {
             cX = x;
             cY = y;
         }
 
-        private void createInputCircleAndSubtract(int x, int y, int w, int h)
-        {
+        private void createInputCircleAndSubtract(int x, int y, int w, int h) {
             areaInputCircle = new Area(new Ellipse2D.Double(x, y, w, h));
             a1.subtract(areaInputCircle);
         }
 
         private void executeWithBorder(
                 int x1, int y1, int w1, int h1,
-                int x2, int y2, int w2, int h2)
-        {
+                int x2, int y2, int w2, int h2) {
             Area r1 = new Area(new Rectangle2D.Double(x1, y1, w1, h1));
             Area r2 = new Area(new Rectangle2D.Double(x2, y2, w2, h2));
             a1.subtract(r1);
             a1.subtract(r2);
         }
 
-        private void paintGradientStart(int x, int y)
-        {
+        private void paintGradientStart(int x, int y) {
             p1 = new Point2D.Float(x, y);
         }
 
-        private void paintGradientEnd(int x, int y)
-        {
+        private void paintGradientEnd(int x, int y) {
             p2 = new Point2D.Float(x, y);
         }
 
-        private void drawGradient()
-        {
+        private void drawGradient() {
             g2 = new GradientPaint(p1, colorNowStart, p2, colorNowEnd, false);
             graphics2D.setPaint(g2);
             graphics2D.fill(a1);
         }
 
-        private void drawIcon(int x, int y)
-        {
+        private void drawIcon(int x, int y) {
             icon.paintIcon(CircleButton.this, graphics2D, x, y);
         }
 
-        private void drawRT()
-        {
+        private void drawRT() {
             DrawOptions drawOptions =
                     new DrawOptions(
                             new Rectangle(-wHalf, y, w, h),
@@ -311,16 +276,14 @@ public class CircleButton extends JPanel implements MouseListener
                             new Rectangle(cX - wC / 2, cY - hC / 2, wC, hC),
                             new Point(w, 0),
                             new Point(0, h));
-            if (border != null)
-            {
+            if (border != null) {
                 Insets inserts = border.getBorderInsets(CircleButton.this);
                 drawOptions.setRectangleWithBorderOne(
                         new Rectangle(0, 0, inserts.right + inserts.left, h));
                 drawOptions.setRectangleWithBorderOne(
                         new Rectangle(0, hHalf - inserts.bottom - inserts.top, w, hHalf + inserts.bottom + inserts.top));
             }
-            if (icon != null)
-            {
+            if (icon != null) {
                 int iw = icon.getIconWidth();
                 int ih = icon.getIconHeight();
                 drawOptions.setPointIcon(new Point(iw / 2, (h / 2) - ih - ih / 2));
@@ -328,8 +291,7 @@ public class CircleButton extends JPanel implements MouseListener
             drawButton(drawOptions);
         }
 
-        private void drawLB()
-        {
+        private void drawLB() {
             DrawOptions drawOptions =
                     new DrawOptions(
                             new Rectangle(x, -hHalf, w, h),
@@ -337,16 +299,14 @@ public class CircleButton extends JPanel implements MouseListener
                             new Rectangle(cX - wC / 2, cY - hC / 2, wC, hC),
                             new Point(0, h),
                             new Point(w, 0));
-            if (border != null)
-            {
+            if (border != null) {
                 Insets inserts = border.getBorderInsets(CircleButton.this);
                 drawOptions.setRectangleWithBorderOne(
                         new Rectangle(wHalf - inserts.left - inserts.right, 0, wHalf + inserts.left + inserts.right, h));
                 drawOptions.setRectangleWithBorderOne(
                         new Rectangle(0, 0, w, inserts.top + inserts.bottom));
             }
-            if (icon != null)
-            {
+            if (icon != null) {
                 int iw = icon.getIconWidth();
                 int ih = icon.getIconHeight();
                 drawOptions.setPointIcon(new Point((w / 2) - iw - iw / 2, ih / 2));
@@ -354,8 +314,7 @@ public class CircleButton extends JPanel implements MouseListener
             drawButton(drawOptions);
         }
 
-        private void drawRB()
-        {
+        private void drawRB() {
 
             DrawOptions drawOptions =
                     new DrawOptions(
@@ -364,16 +323,14 @@ public class CircleButton extends JPanel implements MouseListener
                             new Rectangle(cX - wC / 2, cY - hC / 2, wC, hC),
                             new Point(w, h),
                             new Point(0, 0));
-            if (border != null)
-            {
+            if (border != null) {
                 Insets inserts = border.getBorderInsets(CircleButton.this);
                 drawOptions.setRectangleWithBorderOne(
                         new Rectangle(0, 0, inserts.right + inserts.left, h));
                 drawOptions.setRectangleWithBorderOne(
                         new Rectangle(0, 0, w, inserts.top + inserts.bottom));
             }
-            if (icon != null)
-            {
+            if (icon != null) {
                 int iw = icon.getIconWidth();
                 int ih = icon.getIconHeight();
                 drawOptions.setPointIcon(new Point(iw / 2, ih / 2));

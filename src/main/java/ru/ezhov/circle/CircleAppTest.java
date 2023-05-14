@@ -40,7 +40,7 @@ public class CircleAppTest {
             } catch (Throwable ex) {
                 //
             }
-            CircleApp frame = new CircleApp(80, 80);
+            CircleApp frame = new CircleApp(100, 100);
 
             CircleButton lt = frame.getCircleButtonLT();
             lt.setGradient(new Gradient(Color.magenta, Color.black, Color.CYAN, Color.green));

@@ -1,15 +1,14 @@
 package ru.ezhov.circle;
 
-import java.awt.Point;
-import java.awt.Rectangle;
+import java.awt.*;
 
 /**
  * Хранилище настроек рисования для передачи
  * <p>
+ *
  * @author ezhov_da
  */
-class DrawOptions
-{
+class DrawOptions {
     Rectangle rectangleFigure;
     Point point;
     Rectangle rectangleInputCircle;
@@ -25,8 +24,7 @@ class DrawOptions
             Rectangle rectangleInputCircle,
             Point pointGradientStart,
             Point pointGradientEnd
-    )
-    {
+    ) {
         this.rectangleFigure = rectangleFigure;
         this.point = point;
         this.rectangleInputCircle = rectangleInputCircle;
@@ -34,58 +32,47 @@ class DrawOptions
         this.pointGradientEnd = pointGradientEnd;
     }
 
-    public Rectangle getRectangleFigure()
-    {
+    public Rectangle getRectangleFigure() {
         return rectangleFigure;
     }
 
-    public Point getPoint()
-    {
+    public Point getPoint() {
         return point;
     }
 
-    public Rectangle getRectangleInputCircle()
-    {
+    public Rectangle getRectangleInputCircle() {
         return rectangleInputCircle;
     }
 
-    public Rectangle getRectangleWithBorderOne()
-    {
+    public Rectangle getRectangleWithBorderOne() {
         return rectangleWithBorderOne;
     }
 
-    public Rectangle getRectangleWithBorderTwo()
-    {
+    public Rectangle getRectangleWithBorderTwo() {
         return rectangleWithBorderTwo;
     }
 
-    public Point getPointGradientStart()
-    {
+    public Point getPointGradientStart() {
         return pointGradientStart;
     }
 
-    public Point getPointGradientEnd()
-    {
+    public Point getPointGradientEnd() {
         return pointGradientEnd;
     }
 
-    public Point getPointIcon()
-    {
+    public Point getPointIcon() {
         return pointIcon;
     }
 
-    public void setRectangleWithBorderOne(Rectangle rectangleWithBorderOne)
-    {
+    public void setRectangleWithBorderOne(Rectangle rectangleWithBorderOne) {
         this.rectangleWithBorderOne = rectangleWithBorderOne;
     }
 
-    public void setRectangleWithBorderTwo(Rectangle rectangleWithBorderTwo)
-    {
+    public void setRectangleWithBorderTwo(Rectangle rectangleWithBorderTwo) {
         this.rectangleWithBorderTwo = rectangleWithBorderTwo;
     }
 
-    public void setPointIcon(Point pointIcon)
-    {
+    public void setPointIcon(Point pointIcon) {
         this.pointIcon = pointIcon;
     }
 
